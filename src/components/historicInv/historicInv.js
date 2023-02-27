@@ -50,12 +50,13 @@ const Historic = (props) => {
                             <option value='USD'>USD</option>
                         </select>
                     </div>
-                    <div>
-                        <label htmlFor='crypto' className='flex text-white pt-6 pb-6 justify-center '>In which cryptocurrency?</label>
+                    <div >
+                        <label htmlFor='crypto' className='flex text-white pt-6 pb-6 justify-center'>In which cryptocurrency?</label>
 
-                        <input list="cryptoList" id="selectCrypto" name="crypto" value={endCurrency} onChange={evt => setEndCurrency(evt.target.value)} className='rounded-lg p-1' />
+                        <input list="cryptoList" id="selectCrypto" name="crypto" value={endCurrency} onChange={evt => setEndCurrency(evt.target.value)} className='rounded-lg p-1 w-1' />
                     </div>
-                    <div className='flex flex-row pt-6'>
+                    <div className='flex flex-col pt-6'>
+
                         <div className='flex flex-col'>
                             <label htmlFor='startDate' className='text-white'>in:</label>
                             <input name='startDate' type='date' value={startDate} onChange={evt => setStartDate(evt.target.value)} className='p-1 rounded-lg m-5 my-2'></input>
@@ -64,6 +65,7 @@ const Historic = (props) => {
                             <label htmlFor='endDate' className='text-white'>at:</label>
                             <input name='endDate' type='date' value={endDate} onChange={evt => setEndDate(evt.target.value)} className='p-1 rounded-lg my-2 '></input>
                         </div>
+
                     </div>
                     <button className="bg-teal-300 hover:bg-teal-200 text-white font-bold py-3 px-16 mt-16 rounded-full" onClick={(evt) => historicCalc(evt)}>
                         CALCULATE
@@ -72,8 +74,8 @@ const Historic = (props) => {
             </div>
             <div className='flex flex-col bg-black-100 w-2/3 m-6 rounded-lg'>
                 <h3 className='text-teal-100 text-3xl text mt-10'>Result:</h3>
-                <div id='graph-container' className='bg-black-200 h-3/6 w-4/5 mx-auto my-6'>{butClicked && <img src={graph} alt='graph' className='mx-auto h-full w-full'/>}</div>
-                <div className='mt-6'>
+                <div id='graph-container' className='bg-black-200 h-3/6 w-4/5 mx-auto my-6'>{butClicked && <img src={graph} alt='graph' className='mx-auto h-full w-full' />}</div>
+                <div className='mt-6 lg flex-col'>
                     <h3 className='text-white text-2xl mb-4'>Initial amount in euro: <span className='text-teal-100'>{amount} €</span></h3>
                     <h3 className='text-white text-2xl mb-4'>Amount in crypto: <span className='text-teal-100'>{cryptoAmount}</span></h3>
                     <h3 className='text-white text-2xl mb-4'>End amount: <span className='text-green-100'>{endAmount} €</span></h3>
