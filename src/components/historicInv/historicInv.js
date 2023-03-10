@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Graph from './graph/graph'
+import Graph from './graph/graph';
+  
 
 const Historic = (props) => {
     const [amount, setAmount] = useState(100);
@@ -16,8 +17,11 @@ const Historic = (props) => {
 
     const historicCalc = async (evt) => {
         evt.preventDefault();
-        const start = Math.floor(new Date(Number(startDate.slice(0, 4)), Number(startDate.slice(5, 7)), Number(startDate.slice(8, 10))).getTime() / 1000);
-        const end = Math.floor(new Date(Number(endDate.slice(0, 4)), Number(endDate.slice(5, 7)), Number(endDate.slice(8, 10))).getTime() / 1000);
+        //const start = Math.floor(new Date(Number(startDate.slice(0, 4)), Number(startDate.slice(5, 7)), Number(startDate.slice(8, 10))).getTime() / 1000);
+        let start  = new Date(startDate).getTime()/1000
+        console.log(start)
+        //const end = Math.floor(new Date(Number(endDate.slice(0, 4)), Number(endDate.slice(5, 7)), Number(endDate.slice(8, 10))).getTime() / 1000);
+        let end = new Date(endDate).getTime()/1000
         const response = await fetch(`https://api.coingecko.com/api/v3/coins/${endCurrency}/market_chart/range?vs_currency=${startCurrency}&from=${start}&to=${end}`);
         const data = await response.json();
         let cryptoAmount;
@@ -83,20 +87,20 @@ const Historic = (props) => {
             </div>
             <div className='flex flex-col bg-black-100 w-11/12 xl:w-2/3 m-6 xl:mx-6 mx-auto rounded-lg'>
                 {hasData ? <div>
-                    <h3 className='text-teal-100 text-3xl text mt-10'>RESULT</h3>
+                    <h3 className='text-teal-100 text-3xl text mt-4 '>RESULT</h3>
                     <div id='graph-container' className='bg-black-200 h-3/6 w-4/5 mx-auto my-6 shadow'><Graph priceData={priceData} yearData={yearData} color={color} /></div>
-                    <div className='mt-6'>
-                        <div className='border-2 border-black-300 bg-black-200 pt-2 mx-24 rounded-lg mt-4 shadow'>
+                    <div className='mt-8'>
+                        <div className='border-2 border-black-300 bg-black-200 pt-2 mx-auto rounded-lg mt-4 shadow w-4/5'>
                             <h3 className='text-white text-2xl mb-4'>Initial amount : <span className='text-teal-100'>{amount} €</span></h3>
                         </div>
-                        <div className='border-2 border-black-300 bg-black-200 pt-2 mx-24 rounded-lg mt-4 shadow'>
+                        <div className='border-2 border-black-300 bg-black-200 pt-2 mx-auto rounded-lg mt-4 shadow w-4/5'>
                             <h3 className='text-white text-2xl mb-4'>Crypto amount : {returnData.cryptoAmount} {endCurrency}</h3>
                         </div>
-                        <div className='flex flex-row justify-center items-center mx-24 pt-2 my-4'>
-                            <div className='mx-2 border-black-300 bg-black-200 pt-2 px-6 border-2 rounded-lg mb-10 shadow'>
+                        <div className='flex flex-col justify-center items-center mx-auto'>
+                            <div className='mx-auto border-black-300 bg-black-200 pt-2 px-6 border-2 rounded-lg mt-4 shadow w-4/5'>
                                 <h3 className='text-white text-2xl mb-4'>End amount: {returnData.endAmount} {startCurrency}</h3>
                             </div>
-                            <div className='mx-2 border-black-300 bg-black-200 pt-2 px-6 border-2 rounded-lg mb-10 shadow'>
+                            <div className='mx-auto border-black-300 bg-black-200 pt-2 px-6 border-2 rounded-lg shadow w-4/5 mt-4 mb-4'>
                                 <h3 className='text-white text-2xl mb-4'>Percentage difference: {returnData.percentage}%</h3>
                             </div>
                         </div>
